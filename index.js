@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("dist"));
 
-morgan.token("datan", (req, res) => JSON.stringify(req.body));
+morgan.token("datan", (req) => JSON.stringify(req.body));
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms :datan")
 );
@@ -81,7 +81,10 @@ app.put("/api/persons/:id", (request, response, next) => {
 app.delete("/api/persons/:id", (request, response, next) => {
   const id = request.params.id;
   Person.findByIdAndDelete(id)
-    .then((result) => response.status(204).end())
+    .then((result) => {
+      console.log(result);
+      response.status(204).end();
+    })
     .catch((error) => next(error));
 });
 

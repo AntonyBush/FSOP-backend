@@ -4,7 +4,7 @@ const url = process.env.MONGODB_URL;
 
 mongoose
   .connect(url)
-  .then((result) => console.log("DB Running..."))
+  .then(() => console.log("DB Running..."))
   .catch((error) => console.log(error.message));
 
 const personSchema = new mongoose.Schema({
